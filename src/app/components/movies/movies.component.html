@@ -1,0 +1,12 @@
+<!--Main Layout-->
+<main class="text-center py-5">
+    <div class="container">
+        <div class="row">
+            <!--Grid column-->
+            <app-movie *ngFor="let movie of movies" [movie] = "movie" class="col-lg-3 col-md-12">                
+            </app-movie>
+            <!--Grid column-->
+        </div>
+    </div>
+</main>
+<!--Main Layout-->

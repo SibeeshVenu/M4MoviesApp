@@ -1,0 +1,45 @@
+<main class="text-center py-5">
+  <div class="container">
+    <section class="py-4 text-center text-lg-left">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-5 col-xl-5 pb-3">
+          <!--Featured image-->
+          <div class="view overlay rounded z-depth-2 waves-light" mdbWavesEffect>
+            <img src="{{movie?.new_path}}" alt="{{movie?.title}}" class="img-fluid">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-7 col-xl-7">
+          <!--Excerpt-->
+          <a href="" class="green-text">
+            <h6 class="font-weight-bold pb-1">
+              <i class="fa fa-film"></i>Movie</h6>
+          </a>
+          <h3 class="mb-4 font-weight-bold dark-grey-text">
+            <strong>{{movie?.title}} ({{movie?.vote_average}})</strong>
+          </h3>
+          <p>{{movie?.overview}}</p>
+          <p>
+            <strong>Release Date: </strong>
+          </p>
+          <p>
+            {{movie?.release_date | date: "fullDate"}}
+          </p>
+          <div class="md-form" [hidden]="!movie?.isWatchList">
+            <i class="fa fa-pencil prefix"></i>
+            <textarea [(ngModel)]="movie.comments" mdbInputDirective type="text" id="form8" class="md-textarea form-control" rows="3"></textarea>
+            <label for="form8">Type your comments here...</label>            
+            <button type="button" (click)="addComment()" class="btn btn-primary waves-light" mdbWavesEffect>Submit</button>                     
+          </div>          
+        </div>
+        <!--Grid column-->
+      </div>
+    </section>
+  </div>
+</main>

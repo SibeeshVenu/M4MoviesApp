@@ -1,0 +1,50 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+    <!-- Navbar brand -->
+    <logo>
+        <a class="navbar-brand" href="#">M4Movies</a>
+    </logo>
+    <!-- Collapsible content -->
+    <links>
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a [routerLink]="['movies/popular']" class="nav-link waves-light" mdbWavesEffect>Popular
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="movies/top-rated" class="nav-link waves-light" mdbWavesEffect>Top Rated</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="movies/watchlist" class="nav-link waves-light" mdbWavesEffect>Watchlist</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                    Other Filters
+                    <span class="caret"></span>
+                </a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a routerLink="movies/upcoming" class="dropdown-item waves-light" mdbWavesEffect href="#">Upcoming</a>
+                    <a routerLink="movies/now-playing" class="dropdown-item waves-light" mdbWavesEffect href="#">Now Playing</a>
+                </div>
+            </li>
+            <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+                <a routerLink="register" class="nav-link waves-light" mdbWavesEffect>Register</a>
+            </li>
+            <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+                <a routerLink="login" class="nav-link waves-light" mdbWavesEffect>Login</a>
+            </li>
+            <li class="nav-item" *ngIf="auth.isLoggedIn()">
+                <a (click)="auth.logout()" class="nav-link waves-light" mdbWavesEffect>Logout</a>
+            </li>
+        </ul>
+        <!-- Links -->
+
+        <app-search></app-search>
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->

@@ -1,0 +1,34 @@
+<main class="text-center">
+  <div class="container">
+    <section class="py-4 text-center text-lg-left">
+      <div class="row">
+        <!-- Register form -->
+        <form [formGroup]="registerForm" (ngSubmit)="register()" style="width:100%">
+          <p class="h5 text-center mb-4">Sign up</p>
+
+          <div class="md-form">
+            <i class="fa fa-user prefix grey-text"></i>
+            <input type="text" formControlName="orangeFormName" id="orangeForm-name" class="form-control" mdbInputDirective>
+            <label for="orangeForm-name">Your name</label>
+          </div>
+          <div class="md-form">
+            <i class="fa fa-envelope prefix grey-text"></i>
+            <input type="email" formControlName="orangeFormEmail" id="orangeForm-email" class="form-control" mdbInputDirective>
+            <label for="orangeForm-email">Your email</label>
+          </div>
+
+          <div class="md-form">
+            <i class="fa fa-lock prefix grey-text"></i>
+            <input type="password" formControlName="orangeFormPass" id="orangeForm-pass" class="form-control" mdbInputDirective>
+            <label for="orangeForm-pass">Your password</label>
+          </div>
+
+          <div class="text-center">
+            <input class="btn btn-deep-orange waves-light" type="submit" value="Sign up" mdbWavesEffect>
+          </div>
+        </form>
+        <!-- Register form -->
+      </div>
+    </section>
+  </div>
+</main>

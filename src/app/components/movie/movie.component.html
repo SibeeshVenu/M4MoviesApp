@@ -1,0 +1,27 @@
+<!--Card-->
+<div class="card">
+    <!--Card image-->
+    <div class="view hm-white-slight waves-light" mdbWavesEffect>
+        <a href="movie/{{movie?.id}}">
+            <img src="{{movie?.new_path}}" class="img-responsive thumb-custom" alt={{movie?.title}}>
+        </a>
+        <a>
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <a href="movie/{{movie?.id}}">
+            <h6 class="card-title">{{movie?.title}} ({{movie?.vote_average}})</h6>
+        </a>
+        <p class="card-text">{{movie?.release_date | date: "fullDate"}}</p>
+        <!--Text-->
+        <p class="card-text">{{movie?.overview}}</p>
+        <img class="twentyFive float-left" [src]="movie?.isWatchList ? 'assets/images/removeFromWatchList.png' : 
+        'assets/images/addToWatchlist.png'" (click)="addOrRemoveWatchList()" [title]="movie?.isWatchList ? 'Remove from watchlists' : 'Add to watchlists'">
+        <a href="movie/{{movie?.id}}" class="btn btn-primary float-right" mdbWavesEffect>Read more...</a>
+    </div>
+</div>
+<br/>
+<!--/.Card-->
