@@ -10,7 +10,7 @@ import { AppGuardGuard } from '../app-guard.guard';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/movies',
+        redirectTo: '/login',
         pathMatch: 'full'
     },
     {

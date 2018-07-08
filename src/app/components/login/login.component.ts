@@ -5,6 +5,8 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
+import '../../models/interfaces/IUser';
+import '../../models/interfaces/IMovie';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService) {
     this.loginForm = fb.group({
       defaultFormEmail: ['', [Validators.required, Validators.email]],
-      defaultFormPass: ['', [Validators.required, Validators.minLength(8)]]
+      defaultFormPass: ['', [Validators.required]]
     });
   }
 
@@ -36,9 +38,7 @@ export class LoginComponent implements OnInit {
     this.user.password = this.loginForm.value.defaultFormPass;
     this.apiService.post(Constants.UrlConstants.login, this.user).
       subscribe(data => {
-        console.log(data);
         this.auth.login(data);
       });
   }
-
 }

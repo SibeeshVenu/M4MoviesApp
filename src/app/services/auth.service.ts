@@ -11,7 +11,7 @@ export class AuthService {
 
   login(token: string){
     localStorage.setItem(Constants.Common.tokenKey, token);
-    this.route.navigate(['movies']);
+    this.route.navigate(['/movies']);
   }
 
   logout(){

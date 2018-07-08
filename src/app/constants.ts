@@ -6,7 +6,7 @@ export namespace Constants {
         static readonly getUpcomingMovies = "movies/upcoming";
         static readonly getNowPlayingMovies = "movies/now_playing";
         static readonly getTopRatedMovies = "movies/top_rated";
-        static readonly addToWatchList = "movies";
+        static readonly addToWatchList = "movies/addToWatchList";
         static readonly addComment = "movies/addComment";
         static readonly removeFromWatchList = "movies";
         static readonly getWatchList = "movies";

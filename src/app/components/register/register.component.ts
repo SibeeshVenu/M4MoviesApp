@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = fb.group({
       orangeFormName: ['', Validators.required],
       orangeFormEmail: ['', [Validators.required, Validators.email]],
-      orangeFormPass: ['', [Validators.required, Validators.minLength(8)]]
+      orangeFormPass: ['', [Validators.required]]
     });
   }
 
@@ -35,9 +35,10 @@ export class RegisterComponent implements OnInit {
     this.user.email = this.registerForm.value.orangeFormEmail;
     this.user.password = this.registerForm.value.orangeFormPass;
     this.apiService.post(Constants.UrlConstants.register, this.user).
-      subscribe(data => {
-        console.log(data);
-        this.route.navigate(['login']);
-      });
+      subscribe(data => this.onSuccess());
+  }
+
+  onSuccess(): any {
+    this.route.navigate(['login'])
   }
 }

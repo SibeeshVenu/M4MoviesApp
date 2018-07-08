@@ -33,7 +33,6 @@ export class MoviesComponent implements OnInit {
   }
 
   bindMovies(data: Array<Movie>) {
-    console.log(data)
     data.forEach((m: IMovie, index) => {      
       let localMovie: IMovie = new Movie();
       localMovie.id = m.id;

@@ -3,7 +3,7 @@
     <section class="py-4 text-center text-lg-left">
       <div class="row">
         <!-- Register form -->
-        <form [formGroup]="registerForm" (ngSubmit)="register()" style="width:100%">
+        <form [formGroup]="registerForm" id="registerForm" (ngSubmit)="register()" style="width:100%">
           <p class="h5 text-center mb-4">Sign up</p>
 
           <div class="md-form">
@@ -24,7 +24,7 @@
           </div>
 
           <div class="text-center">
-            <input class="btn btn-deep-orange waves-light" type="submit" value="Sign up" mdbWavesEffect>
+            <input id="btnSubmit" class="btn btn-deep-orange waves-light" type="submit" value="Sign up" mdbWavesEffect>
           </div>
         </form>
         <!-- Register form -->

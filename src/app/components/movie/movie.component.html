@@ -18,7 +18,7 @@
         <p class="card-text">{{movie?.release_date | date: "fullDate"}}</p>
         <!--Text-->
         <p class="card-text">{{movie?.overview}}</p>
-        <img class="twentyFive float-left" [src]="movie?.isWatchList ? 'assets/images/removeFromWatchList.png' : 
+        <img class="twentyFive float-left add-watch-list" [src]="movie?.isWatchList ? 'assets/images/removeFromWatchList.png' : 
         'assets/images/addToWatchlist.png'" (click)="addOrRemoveWatchList()" [title]="movie?.isWatchList ? 'Remove from watchlists' : 'Add to watchlists'">
         <a href="movie/{{movie?.id}}" class="btn btn-primary float-right" mdbWavesEffect>Read more...</a>
     </div>

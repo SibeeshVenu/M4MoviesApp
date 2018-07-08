@@ -36,7 +36,7 @@
             <li class="nav-item" *ngIf="!auth.isLoggedIn()">
                 <a routerLink="login" class="nav-link waves-light" mdbWavesEffect>Login</a>
             </li>
-            <li class="nav-item" *ngIf="auth.isLoggedIn()">
+            <li id="logout" class="nav-item" *ngIf="auth.isLoggedIn()">
                 <a (click)="auth.logout()" class="nav-link waves-light" mdbWavesEffect>Logout</a>
             </li>
         </ul>

@@ -9,19 +9,24 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class ApiService {
-  private baseUrl: string = environment.apiUrl;
+  private baseUrl: string;
   constructor(private http: Http, private auth: AuthService) {
   }
 
   request(url: string, method: RequestMethod, body?: Object) {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
+
     if (this.isAuthApiCall(url)) {
-      this.baseUrl = environment.authApiUrl;
+      this.baseUrl = environment.authApiUrl;      
+    }else{
+      this.baseUrl = environment.apiUrl;     
     }
+
     if (this.isHeaderNeeded(url)) {
       headers.append("Authorization", `Bearer ${this.auth.getToken()}`)
     }
+    
     const requestOptions = new RequestOptions({
       url: `${this.baseUrl}${url}`,
       method: method,
@@ -37,8 +42,10 @@ export class ApiService {
       .pipe(map((res: Response) => res.json()),
         catchError((res: Response) => this.onError(res)));
   }
+
   isAuthApiCall(url: string) {
-    return url === Constants.UrlConstants.register || url === Constants.UrlConstants.login;
+    console.log(url);
+    return (url === Constants.UrlConstants.register || url === Constants.UrlConstants.login);
   }
 
   isHeaderNeeded(url: string) {
@@ -54,7 +61,6 @@ export class ApiService {
       statusCode: statusCode,
       error: body.error
     };
-    console.log(error);
     return Observable.throw(error);
   }
 
