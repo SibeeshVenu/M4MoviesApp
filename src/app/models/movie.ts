@@ -14,4 +14,6 @@ export class Movie implements IMovie {
     production_companies: string;
     revenue: number;
     comments: string;
+    userid: number;
+    watchListMovieId: number;
 }

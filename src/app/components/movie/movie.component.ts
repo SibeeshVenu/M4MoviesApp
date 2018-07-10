@@ -3,6 +3,7 @@ import { Movie } from '../../models/movie';
 import { ApiService } from '../../services/api.service';
 import { Constants } from '../../constants';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-movie',
@@ -13,12 +14,15 @@ export class MovieComponent implements OnInit {
   @Input()
   movie: IMovie;
 
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private authService: AuthService,
+    private apiService: ApiService,
+    private router: Router) { }
 
   ngOnInit() {
   };
 
   addOrRemoveWatchList() {
+    this.movie.userid = Number(this.authService.getLoggedInUserId());
     if (this.movie.isWatchList) {
       this.apiService.delete(Constants.UrlConstants.removeFromWatchList, this.movie)
         .subscribe(data => {

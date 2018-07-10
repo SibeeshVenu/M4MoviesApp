@@ -5,6 +5,7 @@ import { Movie } from '../../models/movie';
 import { environment } from '../../../environments/environment';
 import { Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-movies',
@@ -17,7 +18,8 @@ export class MoviesComponent implements OnInit {
   searchType: string;
 
   constructor(private apiService: ApiService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -26,6 +28,10 @@ export class MoviesComponent implements OnInit {
 
   getMovies() {
     this.route.data.subscribe((data) => this.searchType = data.searchType);
+    if (this.searchType === Constants.UrlConstants.getWatchList) {
+      this.searchType = this.searchType + '/' + this.authService.getLoggedInUserId();
+    }
+
     this.apiService.get(this.searchType)
       .subscribe(data => {
         this.bindMovies(data);
@@ -33,7 +39,7 @@ export class MoviesComponent implements OnInit {
   }
 
   bindMovies(data: Array<Movie>) {
-    data.forEach((m: IMovie, index) => {      
+    data.forEach((m: IMovie, index) => {
       let localMovie: IMovie = new Movie();
       localMovie.id = m.id;
       localMovie.original_language = m.original_language;
@@ -46,6 +52,7 @@ export class MoviesComponent implements OnInit {
       localMovie.vote_average = m.vote_average;
       localMovie.vote_count = m.vote_count;
       localMovie.isWatchList = m.isWatchList;
+      localMovie.watchListMovieId = m.watchListMovieId;
       if (index < 8)
         this.movies.push(localMovie);
     });

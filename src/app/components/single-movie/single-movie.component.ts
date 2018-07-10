@@ -4,6 +4,7 @@ import { Constants } from 'src/app/constants';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { Movie } from '../../models/movie';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-single-movie',
@@ -13,10 +14,16 @@ import { Movie } from '../../models/movie';
 export class SingleMovieComponent implements OnInit {
   movie: IMovie = new Movie();
   id: number;
-  constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute) { }
+  constructor(private apiService: ApiService,
+    public authService: AuthService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.getMovie();
+    if (this.authService.isLoggedIn()) {
+      this.movie.userid = Number(this.authService.getLoggedInUserId());
+      this.getComments();
+    }
   }
 
   getMovie() {
@@ -27,6 +34,17 @@ export class SingleMovieComponent implements OnInit {
     this.apiService.get(`${"movies/"}${this.id}`)
       .subscribe(data => {
         this.bindMovie(data);
+      });
+  };
+
+  getComments() {
+    this.activatedRoute.params.subscribe((params) => {
+      this.id = params['id'];
+    });
+
+    this.apiService.get(`${"movies/getComments?movieId="}${this.id}${"&userId="}${this.authService.getLoggedInUserId()}`)
+      .subscribe(data => {
+        this.bindComment(data);
       });
   };
 
@@ -42,10 +60,17 @@ export class SingleMovieComponent implements OnInit {
     this.movie.vote_average = obj.vote_average;
     this.movie.vote_count = obj.vote_count;
     this.movie.isWatchList = obj.isWatchList;
+    this.movie.watchListMovieId = obj.watchListMovieId;
+  };
+
+  bindComment(obj) {
     this.movie.comments = obj.comments;
   };
 
   addComment() {
+    if (this.authService.isLoggedIn()) {
+      this.movie.userid = Number(this.authService.getLoggedInUserId());
+    }
     this.apiService.post(Constants.UrlConstants.addComment, this.movie)
       .subscribe(data => {
         this.bindMovie(data);

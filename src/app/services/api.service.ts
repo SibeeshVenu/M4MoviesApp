@@ -52,6 +52,7 @@ export class ApiService {
     return url === Constants.UrlConstants.addComment
       || url === Constants.UrlConstants.addToWatchList
       || url === Constants.UrlConstants.getWatchList
+      || url === Constants.UrlConstants.removeFromWatchList
   }
 
   onError(res: Response) {

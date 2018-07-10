@@ -31,12 +31,13 @@
           <p>
             {{movie?.release_date | date: "fullDate"}}
           </p>
-          <div class="md-form" [hidden]="!movie?.isWatchList">
+          <div class="md-form" [hidden]="!authService.isLoggedIn()">
             <i class="fa fa-pencil prefix"></i>
-            <textarea [(ngModel)]="movie.comments" mdbInputDirective type="text" id="form8" class="md-textarea form-control" rows="3"></textarea>
-            <label for="form8">Type your comments here...</label>            
-            <button type="button" (click)="addComment()" class="btn btn-primary waves-light" mdbWavesEffect>Submit</button>                     
-          </div>          
+            <textarea [(ngModel)]="movie.comments" mdbInputDirective type="text" id="form8" class="md-textarea form-control"
+              rows="3"></textarea>
+            <label for="form8">Type your comments here...</label>
+            <button type="button" (click)="addComment()" class="btn btn-primary waves-light" mdbWavesEffect>Submit</button>
+          </div>
         </div>
         <!--Grid column-->
       </div>

@@ -14,4 +14,6 @@ interface IMovie {
     production_companies: string;
     revenue: number;
     comments: string;
+    userid: number;
+    watchListMovieId: number;
 }

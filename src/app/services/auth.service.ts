@@ -9,8 +9,9 @@ export class AuthService {
 
   constructor(private route: Router) { }
 
-  login(token: string){
-    localStorage.setItem(Constants.Common.tokenKey, token);
+  login(user: IUser){
+    localStorage.setItem(Constants.Common.tokenKey, user.currentToken);
+    localStorage.setItem(Constants.Common.loggedInUserId, user.id.toString());
     this.route.navigate(['/movies']);
   }
 
@@ -25,5 +26,9 @@ export class AuthService {
 
   getToken(){
     return localStorage.getItem(Constants.Common.tokenKey);
+  }
+
+  getLoggedInUserId(){
+    return localStorage.getItem(Constants.Common.loggedInUserId);
   }
 }

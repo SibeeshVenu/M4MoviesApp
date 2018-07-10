@@ -8,8 +8,8 @@ export namespace Constants {
         static readonly getTopRatedMovies = "movies/top_rated";
         static readonly addToWatchList = "movies/addToWatchList";
         static readonly addComment = "movies/addComment";
-        static readonly removeFromWatchList = "movies";
-        static readonly getWatchList = "movies";
+        static readonly removeFromWatchList = "movies/deleteFromWatchList";
+        static readonly getWatchList = "movies/getWatchList";
         static readonly thumbnailUrl = "w185_and_h278_bestv2";
         static readonly singleImglUrl = "w600_and_h900_bestv2";    
         static readonly register = "register";    
@@ -20,6 +20,7 @@ export namespace Constants {
     }
 
     export class Common {
-        static readonly tokenKey = "tokenKey";        
+        static readonly tokenKey = "tokenKey";  
+        static readonly loggedInUserId = "loggedInUserId";        
     }
 }
