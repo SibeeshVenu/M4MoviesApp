@@ -20,6 +20,7 @@ import { SingleMovieComponent } from './components/single-movie/single-movie.com
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AppGuardGuard } from './app-guard.guard';
+import { DummyComponent } from './components/dummy/dummy.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AppGuardGuard } from './app-guard.guard';
     MovieComponent,
     SingleMovieComponent,
     LoginComponent,
-    RegisterComponent    
+    RegisterComponent,
+    DummyComponent    
   ],
   imports: [
     MDBBootstrapModule.forRoot(), HttpModule,

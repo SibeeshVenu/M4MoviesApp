@@ -16,6 +16,7 @@ import '../../models/interfaces/IMovie';
 export class LoginComponent implements OnInit {
   user: IUser;
   loginForm: FormGroup;
+  errorMessage: string;
 
   constructor(private fb: FormBuilder,
     private apiService: ApiService,
@@ -37,8 +38,12 @@ export class LoginComponent implements OnInit {
     this.user.email = this.loginForm.value.defaultFormEmail;
     this.user.password = this.loginForm.value.defaultFormPass;
     this.apiService.post(Constants.UrlConstants.login, this.user).
-      subscribe(data => {
-        this.auth.login(data);
-      });
+      subscribe(
+        data => {
+          this.auth.login(data);
+        },
+        error => {
+          this.errorMessage = Constants.Validation.loginError;
+        });
   }
 }

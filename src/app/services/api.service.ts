@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
-import { Observable } from 'rxjs'
+import { throwError } from 'rxjs';
 import { filter, map, catchError } from 'rxjs/operators';
-
 import { environment } from '../../environments/environment';
 import { Constants } from '../constants';
 import { AuthService } from './auth.service';
@@ -20,11 +19,8 @@ export class ApiService {
     if (this.isAuthApiCall(url)) {
       this.baseUrl = environment.authApiUrl;      
     }else{
-      this.baseUrl = environment.apiUrl;     
-    }
-
-    if (this.isHeaderNeeded(url)) {
-      headers.append("Authorization", `Bearer ${this.auth.getToken()}`)
+      this.baseUrl = environment.apiUrl;  
+      headers.append("Authorization", `Bearer ${this.auth.getToken()}`)   
     }
     
     const requestOptions = new RequestOptions({
@@ -44,25 +40,17 @@ export class ApiService {
   }
 
   isAuthApiCall(url: string) {
-    console.log(url);
     return (url === Constants.UrlConstants.register || url === Constants.UrlConstants.login);
   }
-
-  isHeaderNeeded(url: string) {
-    return url === Constants.UrlConstants.addComment
-      || url === Constants.UrlConstants.addToWatchList
-      || url === Constants.UrlConstants.getWatchList
-      || url === Constants.UrlConstants.removeFromWatchList
-  }
-
+  
   onError(res: Response) {
     const statusCode = res.status;
     const body = res.json();
     const error = {
       statusCode: statusCode,
-      error: body.error
+      error: body
     };
-    return Observable.throw(error);
+    return throwError(error);
   }
 
   get(url: string) {

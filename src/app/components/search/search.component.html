@@ -1,6 +1,7 @@
 <!-- Search form -->
-<form class="form-inline waves-light" mdbWavesEffect>
+<form name="searchForm" class="form-inline waves-light" mdbWavesEffect>
       <div class="md-form mt-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <input class="form-control mr-sm-2" name="search" [(ngModel)]="searchText" type="text" placeholder="Search">
+            <button (click)="search()" class="btn btn-primary waves-light" mdbWavesEffect>Search</button>
       </div>
 </form>

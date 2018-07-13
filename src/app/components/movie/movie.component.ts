@@ -25,14 +25,22 @@ export class MovieComponent implements OnInit {
     this.movie.userid = Number(this.authService.getLoggedInUserId());
     if (this.movie.isWatchList) {
       this.apiService.delete(Constants.UrlConstants.removeFromWatchList, this.movie)
-        .subscribe(data => {
-          window.location.reload();
-        });
+        .subscribe(
+          data => {
+            window.location.reload();
+          },
+          error => {
+              console.log(error);
+          });
     } else {
       this.apiService.post(Constants.UrlConstants.addToWatchList, this.movie)
-        .subscribe(data => {
-          this.router.navigate(['movies/watchlist']);
-        });
+        .subscribe(
+          data => {
+            this.router.navigate(['movies/watchlist']);
+          },
+          error => {
+            alert(error.error);
+          });
     }
   };
 }

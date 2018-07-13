@@ -2,25 +2,25 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
     <!-- Navbar brand -->
     <logo>
-        <a class="navbar-brand" href="#">M4Movies</a>
+        <a class="navbar-brand" [routerLink]="['movies/popular']">M4Movies</a>
     </logo>
     <!-- Collapsible content -->
     <links>
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item active" [hidden]="!auth.isLoggedIn()">
                 <a [routerLink]="['movies/popular']" class="nav-link waves-light" mdbWavesEffect>Popular
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="!auth.isLoggedIn()">
                 <a routerLink="movies/top-rated" class="nav-link waves-light" mdbWavesEffect>Top Rated</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="!auth.isLoggedIn()">
                 <a routerLink="movies/watchlist" class="nav-link waves-light" mdbWavesEffect>Watchlist</a>
             </li>
             <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
+            <li class="nav-item dropdown" dropdown [hidden]="!auth.isLoggedIn()">
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                     Other Filters
                     <span class="caret"></span>
@@ -30,19 +30,19 @@
                     <a routerLink="movies/now-playing" class="dropdown-item waves-light" mdbWavesEffect href="#">Now Playing</a>
                 </div>
             </li>
-            <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+            <li class="nav-item" [hidden]="auth.isLoggedIn()">
                 <a routerLink="register" class="nav-link waves-light" mdbWavesEffect>Register</a>
             </li>
-            <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+            <li class="nav-item" [hidden]="auth.isLoggedIn()">
                 <a routerLink="login" class="nav-link waves-light" mdbWavesEffect>Login</a>
             </li>
-            <li id="logout" class="nav-item" *ngIf="auth.isLoggedIn()">
+            <li id="logout" class="nav-item" [hidden]="!auth.isLoggedIn()">
                 <a (click)="auth.logout()" class="nav-link waves-light" mdbWavesEffect>Logout</a>
             </li>
         </ul>
         <!-- Links -->
 
-        <app-search></app-search>
+        <app-search [hidden]="!auth.isLoggedIn()"></app-search>
     </links>
     <!-- Collapsible content -->
 

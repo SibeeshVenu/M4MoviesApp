@@ -15,6 +15,7 @@ describe("Api Service Tests", () => {
             providers: [Http, AuthService]
         });
         http = jasmine.createSpyObj("HttpClient", ['request']);
+        auth = jasmine.createSpyObj("AuthService", ['getToken']);
 
         service = new ApiService(<any>http, auth);
     }));

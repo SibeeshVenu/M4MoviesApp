@@ -18,7 +18,7 @@ export class SingleMovieComponent implements OnInit {
     public authService: AuthService,
     private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.getMovie();
     if (this.authService.isLoggedIn()) {
       this.movie.userid = Number(this.authService.getLoggedInUserId());

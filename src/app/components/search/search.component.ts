@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
-//import { CompleterService } from 'ng-mdb-pro/pro';
-//import { CompleterData } from 'ng-mdb-pro/pro/autocomplete';
-import { Http } from '@angular/http';
-
-export class State {
-  constructor(public name: string, public population: string, public flag: string) { }
-}
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { Constants } from '../../constants';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent{
-  //public dataRemote: CompleterData;
+export class SearchComponent {
+  searchText: string;
+  constructor(private auth: AuthService, private route: Router) {
+  }
+  search() {
+    this.auth.setSearchText(this.searchText);
+    this.redirect('movies/search/' + this.searchText);
+  }
 
-    // constructor(private completerService: CompleterService, http: Http) {
-    //     // tslint:disable-next-line:max-line-length
-    //     this.dataRemote = completerService.remote('https://raw.githubusercontent.com/oferh/ng2-completer/master/demo/res/data/countries.json?', 'name', 'name');
-    // }
+  redirect(uri: string) {
+    this.route.navigateByUrl('/DummyComponent', { skipLocationChange: true }).then(() => {
+      this.route.navigate([uri]);
+    });
+  }
 }

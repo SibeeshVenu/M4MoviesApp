@@ -13,6 +13,7 @@ import { Route, Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   user: IUser;
   registerForm: FormGroup;
+  errorMessage: string;
 
   constructor(private fb: FormBuilder,
     private apiService: ApiService,
@@ -35,7 +36,13 @@ export class RegisterComponent implements OnInit {
     this.user.email = this.registerForm.value.orangeFormEmail;
     this.user.password = this.registerForm.value.orangeFormPass;
     this.apiService.post(Constants.UrlConstants.register, this.user).
-      subscribe(data => this.onSuccess());
+      subscribe(
+        data => { 
+          this.onSuccess(); 
+        },
+        error => {
+          this.errorMessage = Constants.Validation.registerError;
+        });
   }
 
   onSuccess(): any {

@@ -31,4 +31,12 @@ export class AuthService {
   getLoggedInUserId(){
     return localStorage.getItem(Constants.Common.loggedInUserId);
   }
+
+  setSearchText(text: string){
+    sessionStorage.setItem(Constants.Common.searchStorageKey, text);
+  }
+
+  getSearchText(){
+    return sessionStorage.getItem(Constants.Common.searchStorageKey);
+  }
 }
